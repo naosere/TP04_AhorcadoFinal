@@ -13,8 +13,24 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+     public IActionResult Index()
     {
         return View();
+    }
+
+    [HttpPost]
+    public ActionResult Jugar (){
+        return View("PantallaJuego");
+    }
+    public ActionResult enviarCompararLetras(string letra){
+        if (Juego.ingresoCorrecto(letra)){
+                 Juego.verificarLetra(letra);
+    
+        }
+        else{
+    
+        }
+        return View("Juego");
+
     }
 }
