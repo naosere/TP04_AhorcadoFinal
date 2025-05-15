@@ -1,7 +1,9 @@
 @{
 
 }
-<h2>hola</h2>
+<h2>@ViewBag.guiones</h2>
+<h3>INTENTOS FALLIDOS: @ViewBag.cantidadFallidos</h3>
+<h3>LETRAS FALLIDAS: @ViewBag.arriesgosFallidos</h3>
 
 <form action='@Url.Action("compararLetras","Home")' method="post">
 Letra: <input type ="text" name ="letra">
@@ -12,3 +14,4 @@ Letra: <input type ="text" name ="letra">
 Palabra: <input type ="text" name ="palabra">
 <input type="submit" value = "Enviar">
 </form>
+

@@ -13,31 +13,50 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-     public IActionResult Index()
+    public IActionResult Index()
     {
         return View();
     }
 
 
-    public ActionResult Jugar(){
-        return View("PantallaJuego");
-    }
-
-        [HttpPost]
-    public ActionResult compararLetras(char letra){
+    public ActionResult Jugar()
+    {
         Juego.setearPalabra();
-        Juego.verificarLetra(letra);
+        ViewBag.palabraCorrecta = Juego.palabra;
+        ViewBag.guiones = Juego.adivinados;
+        ViewBag.cantidadFallidos = Juego.cantidadFallidos;
+        ViewBag.arriesgosFallidos = Juego.arriesgosFallidos;
         return View("PantallaJuego");
     }
 
 
-    public ActionResult compararPalabra(string palabra){
-        bool arriesgarPalabra = Juego.verificarPalabra(palabra);
+    [HttpPost]
+    public ActionResult compararLetras(string letra)
+    {
+        letra = letra.ToLower();
+        char ingreso = char.Parse(letra);
+        Juego.verificarLetra(ingreso);
         ViewBag.palabraCorrecta = Juego.palabra;
+        ViewBag.guiones = Juego.adivinados;
+        ViewBag.cantidadFallidos = Juego.cantidadFallidos;
+        ViewBag.arriesgosFallidos = Juego.arriesgosFallidos;
+        return View("PantallaJuego");
+    }
+
+
+    [HttpPost]
+    public ActionResult compararPalabra(string palabra)
+    {
+        ViewBag.palabraCorrecta = Juego.palabra;
+        ViewBag.cantidadFallidos = Juego.cantidadFallidos;
+        ViewBag.arriesgosFallidos = Juego.arriesgosFallidos;
+
+        bool arriesgarPalabra = Juego.verificarPalabra(palabra);
         if (arriesgarPalabra)
         {
-            return View ("Gano");
-        }else{return View("Perdio");}
+            return View("Gano");
+        }
+        else { return View("Perdio"); }
 
     }
 }
