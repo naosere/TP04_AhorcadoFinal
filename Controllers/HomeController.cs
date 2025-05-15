@@ -18,19 +18,26 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost]
-    public ActionResult Jugar (){
+
+    public ActionResult Jugar(){
         return View("PantallaJuego");
     }
-    public ActionResult enviarCompararLetras(string letra){
-        if (Juego.ingresoCorrecto(letra)){
-                 Juego.verificarLetra(letra);
-    
-        }
-        else{
-    
-        }
-        return View("Juego");
+
+        [HttpPost]
+    public ActionResult compararLetras(char letra){
+        Juego.setearPalabra();
+        Juego.verificarLetra(letra);
+        return View("PantallaJuego");
+    }
+
+
+    public ActionResult compararPalabra(string palabra){
+        bool arriesgarPalabra = Juego.verificarPalabra(palabra);
+        ViewBag.palabraCorrecta = Juego.palabra;
+        if (arriesgarPalabra)
+        {
+            return View ("Gano");
+        }else{return View("Perdio");}
 
     }
 }
