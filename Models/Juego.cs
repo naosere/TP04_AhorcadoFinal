@@ -31,8 +31,11 @@ public static class Juego{
             
         }
         adivinados = auxiliar;
-        if (aux==false) cantidadFallidos++;
+        if (aux==false)cantidadFallidos++;
         arriesgosFallidos += letraIngresada + " - ";
+        
+         
+
         
     }
 
